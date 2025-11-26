@@ -5,37 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My P5.js Gallery</title>
     <style>
-        /* 기본 설정: 화면 꽉 채우기 & 스크롤 방지 */
+        /* 기본 설정 */
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #222; /* 배경색 (경계선 역할) */
+            background-color: #222;
             font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* 2x2 그리드 레이아웃 */
+        /* 헤더 스타일 */
+        header {
+            background-color: #fff;
+            color: #333;
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 4px solid #333;
+            z-index: 20;
+        }
+
+        header h1 { margin: 0; font-size: 1.5rem; }
+        header p { margin: 5px 0 0; font-size: 0.9rem; color: #666; }
+
+        /* 그리드 컨테이너 */
         .grid-container {
+            flex: 1; /* 남은 공간 채우기 */
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            width: 100vw;
-            height: 100vh;
-            gap: 2px; /* 화면 간격 */
+            gap: 2px;
+            width: 100%;
         }
 
-        /* 각 프로젝트를 감싸는 컨테이너 (상대 위치 기준점) */
+        /* 각 프로젝트 감싸는 박스 */
         .project-wrapper {
-            position: relative;
+            position: relative; /* 자식 요소 위치 기준 */
             width: 100%;
             height: 100%;
             background-color: white;
             overflow: hidden;
         }
 
-        /* 스케치 화면 (iframe) */
+        /* 스케치 화면 */
         iframe {
             width: 100%;
             height: 100%;
@@ -43,49 +58,68 @@
             display: block;
         }
 
-        /* 프로젝트 바로가기 링크 버튼 스타일 */
-        .project-link {
+        /* [요청하신 변경 사항] 텍스트 링크 스타일 */
+        .project-name {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
-            z-index: 10; /* iframe보다 위에 표시 */
+            bottom: 0;      /* 하단에 고정 */
+            left: 0;
+            width: 100%;    /* 가로 꽉 채우기 */
             
-            background-color: rgba(0, 0, 0, 0.7); /* 반투명 검정 배경 */
-            color: #fff;
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            background-color: rgba(0, 0, 0, 0.6); /* 글씨 잘 보이게 배경 반투명 처리 */
+            text-align: center;
+            padding: 15px 0;
             transition: background-color 0.3s;
-            backdrop-filter: blur(2px); /* 배경 흐림 효과 */
         }
 
-        .project-link:hover {
-            background-color: #E91E63; /* 호버 시 강조 색상 */
+        /* 마우스를 올렸을 때 효과 */
+        .project-name:hover {
+            background-color: rgba(233, 30, 99, 0.8); /* 포인트 컬러 */
+        }
+
+        /* 링크 텍스트 스타일 */
+        .project-name a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block; /* 클릭 영역 넓히기 */
         }
     </style>
 </head>
 <body>
 
+    <header>
+        <h1>나의 p5.js 작품</h1>
+        <p>작품 하단 버튼을 누르면 해당 작품만 볼 수 있습니다.</p>
+    </header>
+
     <div class="grid-container">
         <div class="project-wrapper">
-            <iframe src="./sample1/index.html" title="Project 1 Sketch"></iframe>
-            <a href="./sample1/index.html" class="project-link">Project #1 상세 보기 ↗</a>
+            <iframe src="./sample1/index.html" title="Project 1"></iframe>
+            <div class="project-name">
+                <a href="./sample1/index.html">프로젝트 1: 추상화를 그려보자</a>
+            </div>
         </div>
         
         <div class="project-wrapper">
-            <iframe src="./sample4/index.html" title="Project 4 Sketch"></iframe>
-            <a href="./sample4/index.html" class="project-link">Project #4 상세 보기 ↗</a>
+            <iframe src="./sample4/index.html" title="Project 4"></iframe>
+            <div class="project-name">
+                <a href="./sample4/index.html">프로젝트 4: 자신이 만든 아트 작품에 시간에 따른 움직임을 부여하자 (프로젝트1 연계)</a>
+            </div>
         </div>
         
         <div class="project-wrapper">
-            <iframe src="./sample2/index.html" title="Project 2 Sketch"></iframe>
-            <a href="./sample2/index.html" class="project-link">Project #2 상세 보기 ↗</a>
+            <iframe src="./sample2/index.html" title="Project 2"></iframe>
+            <div class="project-name">
+                <a href="./sample2/index.html">프로젝트 2: 자신의 캐리커처를 그려보자</a>
+            </div>
         </div>
         
         <div class="project-wrapper">
-            <iframe src="./sample3/index.html" title="Project 3 Sketch"></iframe>
-            <a href="./sample3/index.html" class="project-link">Project #3 상세 보기 ↗</a>
+            <iframe src="./sample3/index.html" title="Project 3"></iframe>
+            <div class="project-name">
+                <a href="./sample3/index.html">프로젝트 3: 자신의 캐리커쳐에게 움직임을 부여하자 (프로젝트2 연계)</a>
+            </div>
         </div>
     </div>
 
